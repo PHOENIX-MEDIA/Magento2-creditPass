@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * creditPass for Magento 2
+ *
+ * @category    Phoenix
+ * @package     Phoenix_Creditpass
+ * @copyright   Copyright (c) 2016 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Phoenix\Creditpass\Api\ApiInterface" type="Phoenix\Creditpass\Model\Api" />
+    <preference for="Phoenix\Creditpass\Api\RequestBuilderInterface" type="Phoenix\Creditpass\Model\RequestBuilder" />
+    <preference for="Phoenix\Creditpass\Api\Data\SessionInterface" type="Phoenix\Creditpass\Model\Session" />
+    <virtualType name="Phoenix\Creditpass\Model\Session\Storage" type="Magento\Framework\Session\Storage">
+        <arguments>
+            <argument name="namespace" xsi:type="string">creditpass</argument>
+        </arguments>
+    </virtualType>
+    <type name="Phoenix\Creditpass\Model\Session">
+        <arguments>
+            <argument name="storage" xsi:type="object">Phoenix\Creditpass\Model\Session\Storage</argument>
+        </arguments>
+    </type>
+    <type name="Phoenix\Creditpass\Log\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Phoenix\Creditpass\Log\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">creditpassLogger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Phoenix\Creditpass\Log\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Phoenix\Creditpass\Controller\Checkout\CheckPayment">
+        <arguments>
+            <argument name="logger" xsi:type="object">Phoenix\Creditpass\Log\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Phoenix\Creditpass\Model\Api">
+        <arguments>
+            <argument name="logger" xsi:type="object">Phoenix\Creditpass\Log\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Phoenix\Creditpass\Model\Plugin\PaymentMethodApplicable">
+        <arguments>
+            <argument name="logger" xsi:type="object">Phoenix\Creditpass\Log\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Phoenix\Creditpass\Model\Plugin\QuotePaymentImportData">
+        <arguments>
+            <argument name="logger" xsi:type="object">Phoenix\Creditpass\Log\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Phoenix\Creditpass\Model\RiskCheck">
+        <arguments>
+            <argument name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session</argument>
+            <argument name="logger" xsi:type="object">Phoenix\Creditpass\Log\Logger</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Payment\Model\Checks\Composite">
+        <plugin name="creditpass" type="Phoenix\Creditpass\Model\Plugin\PaymentMethodApplicable" sortOrder="10"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Payment">
+        <plugin name="creditpass" type="Phoenix\Creditpass\Model\Plugin\QuotePaymentImportData" sortOrder="10"/>
+    </type>
+
+</config>

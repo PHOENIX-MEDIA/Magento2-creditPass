@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * creditPass for Magento 2
+ *
+ * @category    Phoenix
+ * @package     Phoenix_Creditpass
+ * @copyright   Copyright (c) 2016 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_place_after">
+        <observer name="creditpass_manual_check" instance="Phoenix\Creditpass\Observer\ManualCheckNotification" />
+        <observer name="creditpass_add_order_comment" instance="Phoenix\Creditpass\Observer\AddOrderComment" />
+    </event>
+    <event name="checkout_submit_all_after">
+        <observer name="creditpass_reset_risk_check_result" instance="Phoenix\Creditpass\Observer\ResetRiskCheckResult" />
+    </event>
+</config>

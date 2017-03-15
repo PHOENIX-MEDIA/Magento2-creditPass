@@ -1,0 +1,36 @@
+Allowed Payment Methods,Allowed Payment Methods
+An error occurred during check.,An error occurred during check.
+Authentication ID,Authentication ID
+Authentication Password,Authentication Password
+Authorized,Authorized
+creditPass answer details:,creditPass answer details:
+creditPass answer text:,creditPass answer text:
+creditPass Settings,creditPass Settings
+creditPass URL,creditPass URL
+Custom error message which is shown to the customer if creditPass returns a negative answer and the customer is forced to select another payment method again.,Custom error message which is shown to the customer if creditPass returns a negative answer and the customer is forced to select another payment method again.
+Customer has not been checked because he is member of a trusted group.,Customer has not been checked because he is member of a trusted group.
+Customers in the selected groups will be excluded from creditPass check.,Customers in the selected groups will be excluded from creditPass check.
+Enabled,Enabled
+Enable Group Filtering,Enable Group Filtering
+Enables creditPass check in the shopping cart.,Enables creditPass check in the shopping cart.
+Error Message,Error Message
+Handle Error As Positive Check,Handle Error As Positive Check
+If set to Test Mode the creditPass response depends on last digit of total sum in the cart. (See creditPass documentation for details.),If set to Test Mode the creditPass response depends on last digit of total sum in the cart. (See creditPass documentation for details.)
+"If set to Yes, an error from creditPass will be handled as if creditPass has validated the customer.","If set to Yes, an error from creditPass will be handled as if creditPass has validated the customer."
+"If set to Yes, XML request and response will be shown in the creditPass order comment.","If set to Yes, XML request and response will be shown in the creditPass order comment."
+Live Mode,Live Mode
+Manual check is needed.,Manual check is needed.
+Not authorized,Not authorized
+Payment methods that are always allowed to the customer even if creditPass returns a negative answer. Select the methods by clicking on them in the list while holding the CTRL button.,Payment methods that are always allowed to the customer even if creditPass returns a negative answer. Select the methods by clicking on them in the list while holding the CTRL button.
+Show XML communication in creditPass comment,Show XML communication in creditPass comment
+Test Mode,Test Mode
+Trustful User Groups,Trustful User Groups
+XML request:,XML request:
+XML response:,XML response:
+Payment method,Payment method
+Purchase Type Code,Purchase Type Code
+Choose payment method to check.,Choose payment method to check.
+"Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).","Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer)."
+Send email for manual check,Send email for manual check
+Manual checking email template,Manual checking email template
+Select the email template used to inform the merchant that manual checking is required,Select the email template used to inform the merchant that manual checking is required

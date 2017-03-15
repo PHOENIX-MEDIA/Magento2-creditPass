@@ -1,0 +1,36 @@
+Allowed Payment Methods,Erlaubte Zahlungsarten
+An error occurred during check.,Ein Fehler ist während der Überprüfung aufgetreten.
+Authentication ID,Authentifizierungs-ID
+Authentication Password,Authentifizierungs-Passwort
+Authorized,Autorisiert
+creditPass answer details:,creditPass Antwortdetails:
+creditPass answer text:,creditPass Antworttext:
+creditPass Settings,creditPass Einstellungen
+creditPass URL,creditPass URL
+Custom error message which is shown to the customer if creditPass returns a negative answer and the customer is forced to select another payment method again.,"Benutzerdefinierte Fehlermeldung, die dem Kunden angezeigt wird, falls creditPass eine negative Antwort zurückliefert und der Kunde gezwungen wird, eine andere Zahlungsart auszuwählen"
+Customer has not been checked because he is member of a trusted group.,"Kunde wurde nicht überprüft, da er ein Mitglied in einer vertrauenswürdigen Gruppe ist."
+Customers in the selected groups will be excluded from creditPass check.,Kunden in den ausgewählten Gruppen werden aus der creditPass-Überprüfung herausgenommen.
+Enabled,Aktiviert
+Enable Group Filtering,Gruppenfilterung aktivieren
+Enables creditPass check in the shopping cart.,Aktiviert creditPass-Überprüfung im Einkaufskorb.
+Error Message,Fehlermeldung
+Handle Error As Positive Check,Fehler als positive Überprüfung behandeln
+If set to Test Mode the creditPass response depends on last digit of total sum in the cart. (See creditPass documentation for details.),"Wenn der Testmodus eingestellt ist, dann hängt die Antwort von creditPass von der letzten Ziffer der Gesamtsumme im Warenkorb ab. (Siehe creditPass-Dokumentation für Details.)"
+"If set to Yes, an error from creditPass will be handled as if creditPass has validated the customer.","Wenn Ja ausgewählt ist, wird ein creditPass-Fehler als positive Überprüfung des Kundens behandelt."
+"If set to Yes, XML request and response will be shown in the creditPass order comment.","Wenn Ja ausgewählt ist, werden die XML-Anfragen und -Antworten im creditPass-Kommentar angezeigt."
+Live Mode,Live-Modus
+Manual check is needed.,Manuelle Überprüfung ist notwendig.
+Not authorized,Nicht autorisiert
+Payment methods that are always allowed to the customer even if creditPass returns a negative answer. Select the methods by clicking on them in the list while holding the CTRL button.,"Zahlungsarten, die dem Kunden immer erlaubt werden sollten, sogar wenn creditPass eine negative Antwort zurückliefert. Wählen Sie die Zahlungsarten aus, indem Sie auf diese in der Liste klicken, während Sie die STRG-Taste gedrückt halten."
+Show XML communication in creditPass comment,XML-Kommunikation im creditPass-Bestellkommentar anzeigen
+Test Mode,Test-Modus
+Trustful User Groups,Vertrauenswürdige Benutzergruppen
+XML request:,XML-Anfrage:
+XML response:,XML-Antwort:
+Payment method,Zahlungsmethode
+Purchase Type Code,Purchase Type Code
+Choose payment method to check.,Zu prüfende Zahlungsmethode wählen.
+"Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).","Ganzzahl (1, 2, etc.). Für den Kundentyp (Customer Type) wird automatisch eine zusätzliche Zahl angehängt (1 = Gast, 2 = Kunde)."
+Send email for manual check,Sende E-Mail für manuelle Überprüfung
+Manual checking email template,E-Mail Vorlage für manuelle Überprüfung
+Select the email template used to inform the merchant that manual checking is required,E-Mail Template auswählen, welches verwendet wird, um den Händler über eine nötige manualle Überprüfung zu informieren.

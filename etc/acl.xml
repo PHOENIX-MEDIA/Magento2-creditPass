@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * creditPass for Magento 2
+ *
+ * @category    Phoenix
+ * @package     Phoenix_Creditpass
+ * @copyright   Copyright (c) 2016 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config" title="Configuration" sortOrder="20">
+                            <resource id="Phoenix_Creditpass::config_creditpass" title="creditPass Section" sortOrder="80" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

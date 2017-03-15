@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * creditPass for Magento 2
+ *
+ * @category    Phoenix
+ * @package     Phoenix_Creditpass
+ * @copyright   Copyright (c) 2016 PHOENIX MEDIA GmbH (http://www.phoenix-media.eu)
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="phoenix_media" translate="label" sortOrder="300">
+            <label>PHOENIX MEDIA</label>
+        </tab>
+        <section id="creditpass" translate="label" type="text" sortOrder="401" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>creditPass</label>
+            <tab>phoenix_media</tab>
+            <resource>Phoenix_Creditpass::config_creditpass</resource>
+            <group id="settings" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>creditPass Settings</label>
+                <field id="active" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment>Enables creditPass check in the shopping cart.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cp_url" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>creditPass URL</label>
+                    <comment>Default: https://secure.creditpass.de/atgw/authorize.cfm</comment>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="auth_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Authentication ID</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="auth_pw" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Authentication Password</label>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="live_mode" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Live Mode</label>
+                    <comment>If set to Test Mode the creditPass response depends on last digit of total sum in the cart. (See creditPass documentation for details.)</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="allowed_payment_methods" translate="label comment" type="multiselect" sortOrder="6" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Allowed Payment Methods</label>
+                    <comment>Payment methods that are always allowed to the customer even if creditPass returns a negative answer. Select the methods by clicking on them in the list while holding the CTRL button.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="exclude_groups_enable" translate="label" type="select" sortOrder="7" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Group Filtering</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="exclude_groups" translate="label comment" type="multiselect" sortOrder="8" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Trustful User Groups</label>
+                    <comment>Customers in the selected groups will be excluded from creditPass check.</comment>
+                    <source_model>Phoenix\Creditpass\Model\Source\Customergroups</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="exclude_groups_enable">1</field>
+                    </depends>
+                </field>
+                <field id="error_message" translate="label comment" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error Message</label>
+                    <comment>Custom error message which is shown to the customer if creditPass returns a negative answer and the customer is forced to select another payment method again.</comment>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="handle_error_code" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Handle Error As Positive Check</label>
+                    <comment>If set to Yes, an error from creditPass will be handled as if creditPass has validated the customer.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="send_email_for_manual_check" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Send email for manual check</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="manual_checking_email_template" translate="label comment" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Manual checking email template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>Select the email template used to inform the merchant that manual checking is required</comment>
+                    <depends>
+                        <field id="active">1</field>
+                        <field id="send_email_for_manual_check">1</field>
+                    </depends>
+                </field>
+                <field id="show_xml" translate="label comment" type="select" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show XML communication in creditPass comment</label>
+                    <comment>If set to Yes, XML request and response will be shown in the creditPass order comment.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="active">1</field>
+                    </depends>
+                </field>
+                <field id="log_level" translate="label comment" type="select" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="13">
+                    <label>Log Level</label>
+                    <comment>Define the log severity.</comment>
+                    <source_model>Phoenix\Creditpass\Model\System\Config\Source\Log\Levels</source_model>
+                </field>
+            </group>
+
+            <group id="purchase_type_1" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 1</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+             </group>
+
+            <group id="purchase_type_2" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 2</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+            </group>
+
+            <group id="purchase_type_3" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 3</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+            </group>
+
+            <group id="purchase_type_4" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 4</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+            </group>
+
+            <group id="purchase_type_5" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 5</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+            </group>
+
+            <group id="purchase_type_6" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 6</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+            </group>
+
+            <group id="purchase_type_7" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 7</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+            </group>
+
+            <group id="purchase_type_8" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 8</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+            </group>
+
+            <group id="purchase_type_9" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Purchase Type 9</label>
+                <field id="payment_method" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment method</label>
+                    <comment>Choose payment method to check.</comment>
+                    <source_model>Magento\Payment\Model\Config\Source\Allmethods</source_model>
+                </field>
+                <field id="purchase_type_code" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purchase Type Code</label>
+                    <comment>Integer value (1, 2, etc.). For the customer type another integer value will be automatically appended (1 = guest, 2 = registered customer).</comment>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>
