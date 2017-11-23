@@ -23,7 +23,7 @@ use Magento\Framework\Model\Context as ModelContext;
 use Magento\Quote\Model\Quote\Address;
 use Magento\Quote\Model\Quote\Payment;
 
-class RequestBuilderTest extends \PHPUnit_Framework_TestCase
+class RequestBuilderTest extends \PHPUnit\Framework\TestCase
 {
 
     /**
@@ -86,7 +86,9 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
         $this->modelContext = $this->getMockBuilder(Context::class)
                                 ->disableOriginalConstructor()->getMock();
 
-        $this->escaper = $this->getMock('\Magento\Framework\Escaper');
+        $this->escaper = $this->getMockBuilder(\Magento\Framework\Escaper::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->context = $this->objectManagerHelper->getObject(
             'Magento\Framework\View\Element\Context',
@@ -95,7 +97,9 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $this->config = $this->getMock(Config::class, [], [], '', false);
+        $this->config = $this->getMockBuilder(Config::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->requestBuilder = $this->objectManagerHelper->getObject(
             'Phoenix\Creditpass\Model\RequestBuilder',
@@ -105,9 +109,15 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
             ]
         );
 
-        $this->mockQuote = $this->getMock(Quote::class, [], [], '', false);
-        $this->mockAddress = $this->getMock(Address::class, [], [], '', false);
-        $this->mockPayment = $this->getMock(Payment::class, [], [], '', false);
+        $this->mockQuote = $this->getMockBuilder(Quote::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->mockAddress = $this->getMockBuilder(Address::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->mockPayment = $this->getMockBuilder(Payment::class)
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     public function testImplementRequestBuilderInterface()

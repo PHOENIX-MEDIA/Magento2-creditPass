@@ -14,7 +14,7 @@ use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Module\ModuleList;
 use Magento\TestFramework\ObjectManager;
 
-class CreditpassModuleConfigTest extends \PHPUnit_Framework_TestCase
+class CreditpassModuleConfigTest extends \PHPUnit\Framework\TestCase
 {
 
     private $moduleName = 'Phoenix_Creditpass';

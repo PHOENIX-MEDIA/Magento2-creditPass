@@ -22,7 +22,7 @@ use Magento\Framework\Event;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
-class ManualCheckNotificationTest extends \PHPUnit_Framework_TestCase
+class ManualCheckNotificationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ObjectManagerHelper
@@ -71,10 +71,18 @@ class ManualCheckNotificationTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->objectManagerHelper = new ObjectManagerHelper($this);
-        $this->config = $this->getMock(Config::class, [], [], '', false);
-        $this->riskCheck = $this->getMock(RiskCheck::class, [], [], '', false);
-        $this->transportBuilder = $this->getMock(TransportBuilder::class, [], [], '', false);
-        $this->storeManager = $this->getMock(StoreManagerInterface::class, [], [], '', false);
+        $this->config = $this->getMockBuilder(Config::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->riskCheck = $this->getMockBuilder(RiskCheck::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->transportBuilder = $this->getMockBuilder(TransportBuilder::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->storeManager = $this->getMockBuilder(StoreManagerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->mockEvent = $this->getMockBuilder('\Magento\Framework\Event')
             ->disableOriginalConstructor()
@@ -181,7 +189,7 @@ class ManualCheckNotificationTest extends \PHPUnit_Framework_TestCase
         $this->storeManager->method('getStore')
             ->wilLReturn($storeInterface);
 
-        $transport = $this->getMock('\Magento\Framework\Mail\TransportInterface', [], [], '', false);
+        $transport = $this->getMockBuilder(\Magento\Framework\Mail\TransportInterface::class)->getMock();
 
         $this->transportBuilder
             ->method('getTransport')

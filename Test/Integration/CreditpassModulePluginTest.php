@@ -14,7 +14,7 @@ namespace Phoenix\Creditpass;
 use Magento\TestFramework\Interception\PluginList;
 use Magento\TestFramework\ObjectManager;
 
-class CreditpassModulePluginTest extends \PHPUnit_Framework_TestCase
+class CreditpassModulePluginTest extends \PHPUnit\Framework\TestCase
 {
 
     public function testPlugins()

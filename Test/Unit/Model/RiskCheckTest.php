@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
 use Magento\Customer\Model\Customer;
 use Magento\Sales\Api\OrderRepositoryInterface;
 
-class RiskCheckTest extends \PHPUnit_Framework_TestCase
+class RiskCheckTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ObjectManagerHelper
@@ -92,7 +92,9 @@ class RiskCheckTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->objectManagerHelper = new ObjectManagerHelper($this);
-        $this->config = $this->getMock(Config::class, [], [], '', false);
+        $this->config = $this->getMockBuilder(Config::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->session = $this->getMockBuilder(SessionInterface::class)
             ->disableOriginalConstructor()->getMock();
@@ -109,9 +111,15 @@ class RiskCheckTest extends \PHPUnit_Framework_TestCase
         $this->requestBuilder = $this->getMockBuilder(RequestBuilder::class)
             ->disableOriginalConstructor()->getMock();
 
-        $this->mockQuote = $this->getMock(Quote::class, [], [], '', false);
-        $this->mockPayment = $this->getMock(Payment::class, [], [], '', false);
-        $this->logger = $this->getMock(LoggerInterface::class, [], [], '', false);
+        $this->mockQuote = $this->getMockBuilder(Quote::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->mockPayment = $this->getMockBuilder(Payment::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->logger = $this->getMockBuilder(LoggerInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->customer = $this->getMockBuilder(Customer::class)
             ->disableOriginalConstructor()->getMock();
@@ -119,7 +127,7 @@ class RiskCheckTest extends \PHPUnit_Framework_TestCase
         $this->orderRepository = $this->getMockBuilder(OrderRepositoryInterface::class)
             ->disableOriginalConstructor()->getMock();
 
-        $this->mockRiskCheck = $this->getMock(RiskCheck::class, [], [
+        $this->mockRiskCheck = $this->getMockBuilder(RiskCheck::class)->setConstructorArgs([
             'config' => $this->config,
             'session' => $this->session,
             'checkoutSession' => $this->checkoutSession,
@@ -128,7 +136,10 @@ class RiskCheckTest extends \PHPUnit_Framework_TestCase
             'requestBuilder' => $this->requestBuilder,
             'orderRepository' => $this->orderRepository,
             'logger' => $this->logger
-        ], '', true, true, true, true, true);
+        ])
+            ->enableArgumentCloning()
+            ->enableProxyingToOriginalMethods()
+            ->getMock();
     }
 
     public function testPerformRiskCheck()

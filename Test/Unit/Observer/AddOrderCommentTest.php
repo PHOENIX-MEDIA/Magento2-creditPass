@@ -16,7 +16,7 @@ use Magento\Sales\Model\Order;
 use Magento\Framework\Event;
 use Magento\Framework\Event\ObserverInterface;
 
-class AddOrderCommentTest extends \PHPUnit_Framework_TestCase
+class AddOrderCommentTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ObjectManagerHelper
@@ -51,7 +51,9 @@ class AddOrderCommentTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->objectManagerHelper = new ObjectManagerHelper($this);
-        $this->riskCheck = $this->getMock(RiskCheck::class, [], [], '', false);
+        $this->riskCheck = $this->getMockBuilder(RiskCheck::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->mockEvent = $this->getMockBuilder('\Magento\Framework\Event')
             ->disableOriginalConstructor()

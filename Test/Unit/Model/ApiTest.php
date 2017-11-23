@@ -20,7 +20,7 @@ use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Framework\HTTP\ZendClient;
 use Phoenix\Creditpass\Api\RequestBuilderInterface;
 
-class ApiTest extends \PHPUnit_Framework_TestCase
+class ApiTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @var ObjectManagerHelper
@@ -73,16 +73,15 @@ class ApiTest extends \PHPUnit_Framework_TestCase
 
         $this->logger = $this->getMockBuilder(\Psr\Log\LoggerInterface::class)->disableOriginalConstructor()->getMock();
 
-        $this->httpClientFactory = $this->getMock(
-            'Magento\Framework\HTTP\ZendClientFactory',
-            ['create'],
-            [],
-            '',
-            false
-        );
+        $this->httpClientFactory = $this->getMockBuilder(
+            \Magento\Framework\HTTP\ZendClientFactory::class
+        )
+            ->setMethods(['create'])
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $this->zendClient = $this->getMock('\Magento\Framework\HTTP\ZendClient');
-        $this->zend_http_client = $this->getMock('\Zend_Http_Client');
+        $this->zendClient = $this->getMockBuilder(\Magento\Framework\HTTP\ZendClient::class)->getMock();
+        $this->zend_http_client = $this->getMockBuilder(\Zend_Http_Client::class)->getMock();
 
         $this->requestBuilder = $this->getMockBuilder(\Phoenix\Creditpass\Api\RequestBuilderInterface::class)
                                     ->disableOriginalConstructor()->getMock();

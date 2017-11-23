@@ -12,10 +12,9 @@
 namespace Phoenix\Creditpass;
 
 use Magento\Framework\ObjectManager\ConfigInterface as ObjectManagerConfig;
-use Magento\TestFramework\Interception\PluginList;
 use Magento\TestFramework\ObjectManager;
 
-class DiConfigConfigurationTest extends \PHPUnit_Framework_TestCase
+class DiConfigConfigurationTest extends \PHPUnit\Framework\TestCase
 {
     public function testConfigDataVirtualType()
     {
